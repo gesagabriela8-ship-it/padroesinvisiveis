@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Empresa Sem Você | Marco Ott</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet" />
+  <meta name="color-scheme" content="only light" />
+  <style>
+    :root { color-scheme: only light; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --preto: #0d0d0d;
+      --branco: #f5f2ec;
+      --dourado: #4ab8d4;
+      --dourado-claro: #e8606a;
+      --cinza: #3a3a3a;
+      --cinza-claro: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--preto) !important;
+      color: var(--branco) !important;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 24px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--dourado);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 900;
+      font-size: clamp(52px, 10vw, 100px);
+      line-height: 1.0;
+      letter-spacing: -2px;
+      color: var(--branco);
+      max-width: 900px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero-title em {
+      color: var(--dourado);
+      font-style: italic;
+    }
+
+    .hero-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--dourado);
+      margin: 36px auto;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-intro {
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(245,242,236,0.7);
+      max-width: 580px;
+      text-align: center;
+      line-height: 1.9;
+      font-style: italic;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.7s forwards;
+    }
+
+    .hero-intro strong {
+      color: var(--dourado);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .hero-cta {
+      margin-top: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.9s forwards;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--dourado);
+      color: var(--preto);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 16px 44px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--dourado-claro);
+      transform: translateY(-2px);
+    }
+
+    /* FORM SECTION */
+    .form-section {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--dourado);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(26px, 5vw, 40px);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 48px;
+      color: var(--branco);
+    }
+
+    /* PROGRESS */
+    .progress-wrap { margin-bottom: 56px; }
+
+    .progress-label {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cinza-claro);
+      margin-bottom: 10px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 2px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .progress-fill {
+      height: 2px;
+      background: var(--dourado);
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    /* QUESTION */
+    .question-card {
+      border-left: 2px solid rgba(201,168,76,0.3);
+      padding: 0 0 0 28px;
+      margin-bottom: 52px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .q-number {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--dourado);
+      margin-bottom: 8px;
+    }
+
+    .q-theme {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--branco);
+      margin-bottom: 6px;
+    }
+
+    .q-text {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--cinza-claro);
+      margin-bottom: 22px;
+      line-height: 1.7;
+    }
+
+    .options { display: flex; flex-direction: column; gap: 8px; }
+
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 13px 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+
+    .option:hover { border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.03); }
+    .option.selected { border-color: var(--dourado); background: rgba(201,168,76,0.07); }
+
+    .opt-dot {
+      width: 17px; height: 17px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.18);
+      flex-shrink: 0;
+      margin-top: 3px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .option.selected .opt-dot { border-color: var(--dourado); background: var(--dourado); }
+
+    .opt-dot::after {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--preto);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .option.selected .opt-dot::after { opacity: 1; }
+
+    .opt-label { font-size: 14px; font-weight: 300; color: var(--branco); line-height: 1.55; }
+
+    /* SUBMIT */
+    .submit-area { margin-top: 64px; text-align: center; }
+
+    .btn-submit {
+      background: var(--dourado);
+      color: var(--preto);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 18px 56px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .btn-submit:hover:not(:disabled) { background: var(--dourado-claro); transform: translateY(-2px); }
+
+    .btn-submit:disabled {
+      background: rgba(255,255,255,0.06);
+      color: var(--cinza-claro);
+      cursor: not-allowed;
+    }
+
+    /* RESULT */
+    .result-section {
+      display: none;
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+      animation: fadeUp 0.8s forwards;
+    }
+
+    .result-section.visible { display: block; }
+
+    .result-score-wrap {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .result-eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--dourado);
+      margin-bottom: 20px;
+    }
+
+    .result-score {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(72px, 18vw, 120px);
+      font-weight: 900;
+      color: var(--dourado);
+      line-height: 1;
+      letter-spacing: -4px;
+    }
+
+    .result-score-label {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cinza-claro);
+      margin-top: 8px;
+    }
+
+    .result-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--dourado);
+      margin: 40px auto;
+    }
+
+    .result-faixa {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 700;
+      color: var(--branco);
+      text-align: center;
+      margin-bottom: 32px;
+      line-height: 1.2;
+    }
+
+    .result-desc {
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(245,242,236,0.75);
+      line-height: 1.85;
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 56px;
+    }
+
+    .result-cta-box {
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 40px 36px;
+      text-align: center;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .result-cta-eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--dourado);
+      margin-bottom: 16px;
+    }
+
+    .result-cta-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--branco);
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+
+    .result-cta-text {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--cinza-claro);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .hero-title { letter-spacing: -1px; }
+      .question-card { padding-left: 18px; }
+      .result-cta-box { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+
+
+<section class="hero">
+  <div class="hero-tag">Marco Ott · Neurotrainer</div>
+  <h1 class="hero-title" style="line-height:1.0;">Diagnóstico<br /><span style="font-size:0.48em;font-weight:500;color:var(--dourado);font-style:normal;letter-spacing:2px;line-height:0.7;display:block;margin-top:10px;">Padrões Invisíveis</span><span style="font-size:0.48em;font-weight:500;color:var(--dourado);font-style:normal;letter-spacing:2px;line-height:0.9;display:block;">da sua empresa</span></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-intro">
+    Este diagnóstico foi criado para auxiliar a percepção dos padrões invisíveis que podem estar fortalecendo ou limitando o crescimento da sua empresa.<br /><br />
+    Responda com honestidade. Não existe certo ou errado.
+  </p>
+  <div class="hero-cta">
+    <a class="btn-primary" href="#diagnostico">Fazer o Diagnóstico</a>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="diagnostico">
+  <div id="form-content">
+    <p class="section-eyebrow">Diagnóstico</p>
+    <h2 class="section-title">Diagnóstico dos Padrões Invisíveis da Sua Empresa</h2>
+    <p style="font-size:15px;font-weight:300;color:rgba(245,242,236,0.7);line-height:1.8;margin-bottom:32px;">A cultura de uma empresa aparece no comportamento que se repete na rotina, nas decisões, nas conversas, nos conflitos e nos momentos de pressão.<br /><br />Responda com honestidade. Não existe certo ou errado. Assinale uma resposta para cada pergunta e obtenha uma leitura inicial sobre liderança, autonomia, comunicação, cultura e resultado.</p>
+
+    <!-- IDENTIFICAÇÃO -->
+    <div id="identificacao" style="margin-bottom:48px;">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div>
+          <label style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dourado);display:block;margin-bottom:8px;">Seu nome</label>
+          <input id="campo-nome" type="text" placeholder="Como você se chama? *" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--branco);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;padding:14px 16px;outline:none;" />
+        </div>
+        <div>
+          <label style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dourado);display:block;margin-bottom:8px;">Nome da empresa</label>
+          <input id="campo-empresa" type="text" placeholder="Qual é a sua empresa? *" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--branco);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;padding:14px 16px;outline:none;" />
+        </div>
+        <div>
+          <label style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dourado);display:block;margin-bottom:8px;">E-mail</label>
+          <input id="campo-email" type="email" placeholder="Seu melhor e-mail *" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--branco);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;padding:14px 16px;outline:none;" />
+        </div>
+        <div>
+          <label style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dourado);display:block;margin-bottom:8px;">WhatsApp</label>
+          <input id="campo-whatsapp" type="tel" placeholder="(00) 00000-0000 *" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--branco);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;padding:14px 16px;outline:none;" />
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:var(--cinza-claro);">* Campos obrigatórios. Seus dados são usados apenas para contato sobre a sessão.</p>
+      <p id="erro-campos" style="display:none;margin-top:12px;font-size:13px;color:var(--dourado);font-weight:500;">Preencha todos os campos obrigatórios para ver seu diagnóstico.</p>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-label" id="progress-label">0 de 10 respondidas</div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="question-card" data-q="1">
+      <div class="q-number">01 / 10</div>
+      <div class="q-theme">Centralização da Liderança</div>
+      <p class="q-text">Quando você se ausenta por um dia, como a empresa funciona?</p>
+      <div class="options">
+        <div class="option" data-q="1" data-score="1"><div class="opt-dot"></div><span class="opt-label">A equipe resolve bem sem mim</span></div>
+        <div class="option" data-q="1" data-score="2"><div class="opt-dot"></div><span class="opt-label">Avança, mas ainda me consulta</span></div>
+        <div class="option" data-q="1" data-score="3"><div class="opt-dot"></div><span class="opt-label">Muita coisa espera minha resposta</span></div>
+        <div class="option" data-q="1" data-score="4"><div class="opt-dot"></div><span class="opt-label">Tenho dificuldade de me ausentar</span></div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-card" data-q="2">
+      <div class="q-number">02 / 10</div>
+      <div class="q-theme">Clareza de Papéis</div>
+      <p class="q-text">As pessoas sabem exatamente pelo que são responsáveis?</p>
+      <div class="options">
+        <div class="option" data-q="2" data-score="1"><div class="opt-dot"></div><span class="opt-label">Sim, com clareza</span></div>
+        <div class="option" data-q="2" data-score="2"><div class="opt-dot"></div><span class="opt-label">Na maioria das vezes</span></div>
+        <div class="option" data-q="2" data-score="3"><div class="opt-dot"></div><span class="opt-label">Há dúvidas e sobreposições</span></div>
+        <div class="option" data-q="2" data-score="4"><div class="opt-dot"></div><span class="opt-label">Cada um faz como entende</span></div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-card" data-q="3">
+      <div class="q-number">03 / 10</div>
+      <div class="q-theme">Comunicação</div>
+      <p class="q-text">Quando algo não funciona bem, como isso chega até você?</p>
+      <div class="options">
+        <div class="option" data-q="3" data-score="1"><div class="opt-dot"></div><span class="opt-label">Com clareza e diretamente</span></div>
+        <div class="option" data-q="3" data-score="2"><div class="opt-dot"></div><span class="opt-label">Chega, mas com certo cuidado</span></div>
+        <div class="option" data-q="3" data-score="3"><div class="opt-dot"></div><span class="opt-label">Por terceiros ou nas entrelinhas</span></div>
+        <div class="option" data-q="3" data-score="4"><div class="opt-dot"></div><span class="opt-label">Só quando já virou problema</span></div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card" data-q="4">
+      <div class="q-number">04 / 10</div>
+      <div class="q-theme">Autonomia da Equipe</div>
+      <p class="q-text">Seu time toma decisões dentro do próprio papel?</p>
+      <div class="options">
+        <div class="option" data-q="4" data-score="1"><div class="opt-dot"></div><span class="opt-label">Sim, com segurança</span></div>
+        <div class="option" data-q="4" data-score="2"><div class="opt-dot"></div><span class="opt-label">Toma, mas ainda confirma bastante</span></div>
+        <div class="option" data-q="4" data-score="3"><div class="opt-dot"></div><span class="opt-label">Prefere esperar orientação</span></div>
+        <div class="option" data-q="4" data-score="4"><div class="opt-dot"></div><span class="opt-label">Quase tudo passa pela liderança</span></div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card" data-q="5">
+      <div class="q-number">05 / 10</div>
+      <div class="q-theme">Responsabilização</div>
+      <p class="q-text">Quando algo dá errado, o que costuma acontecer?</p>
+      <div class="options">
+        <div class="option" data-q="5" data-score="1"><div class="opt-dot"></div><span class="opt-label">Assumem, ajustam e propõem solução</span></div>
+        <div class="option" data-q="5" data-score="2"><div class="opt-dot"></div><span class="opt-label">Conversam, mas mudam pouco</span></div>
+        <div class="option" data-q="5" data-score="3"><div class="opt-dot"></div><span class="opt-label">Justificam ou transferem responsabilidade</span></div>
+        <div class="option" data-q="5" data-score="4"><div class="opt-dot"></div><span class="opt-label">A culpa circula e pouco se aprende</span></div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-card" data-q="6">
+      <div class="q-number">06 / 10</div>
+      <div class="q-theme">Conflitos</div>
+      <p class="q-text">Como os conflitos são tratados na empresa?</p>
+      <div class="options">
+        <div class="option" data-q="6" data-score="1"><div class="opt-dot"></div><span class="opt-label">Com conversa e maturidade</span></div>
+        <div class="option" data-q="6" data-score="2"><div class="opt-dot"></div><span class="opt-label">Alguns são tratados, outros ficam</span></div>
+        <div class="option" data-q="6" data-score="3"><div class="opt-dot"></div><span class="opt-label">São evitados e acumulam tensão</span></div>
+        <div class="option" data-q="6" data-score="4"><div class="opt-dot"></div><span class="opt-label">Explodem e deixam desgaste</span></div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-card" data-q="7">
+      <div class="q-number">07 / 10</div>
+      <div class="q-theme">Maturidade da Liderança</div>
+      <p class="q-text">Seus líderes sabem lidar com pessoas, não só com tarefas?</p>
+      <div class="options">
+        <div class="option" data-q="7" data-score="1"><div class="opt-dot"></div><span class="opt-label">Sim, conduzem bem pessoas</span></div>
+        <div class="option" data-q="7" data-score="2"><div class="opt-dot"></div><span class="opt-label">São bons na operação, mas travam com gente</span></div>
+        <div class="option" data-q="7" data-score="3"><div class="opt-dot"></div><span class="opt-label">Lideram mais por cobrança ou pressão</span></div>
+        <div class="option" data-q="7" data-score="4"><div class="opt-dot"></div><span class="opt-label">Ainda depende muito de mim</span></div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-card" data-q="8">
+      <div class="q-number">08 / 10</div>
+      <div class="q-theme">Segurança Psicológica</div>
+      <p class="q-text">As pessoas se sentem seguras para falar a verdade?</p>
+      <div class="options">
+        <div class="option" data-q="8" data-score="1"><div class="opt-dot"></div><span class="opt-label">Sim, falam com respeito</span></div>
+        <div class="option" data-q="8" data-score="2"><div class="opt-dot"></div><span class="opt-label">Falam, mas com cuidado</span></div>
+        <div class="option" data-q="8" data-score="3"><div class="opt-dot"></div><span class="opt-label">Evitam discordar da liderança</span></div>
+        <div class="option" data-q="8" data-score="4"><div class="opt-dot"></div><span class="opt-label">O silêncio aparece demais</span></div>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-card" data-q="9">
+      <div class="q-number">09 / 10</div>
+      <div class="q-theme">Aprendizagem Organizacional</div>
+      <p class="q-text">Quando um erro se repete, o que acontece?</p>
+      <div class="options">
+        <div class="option" data-q="9" data-score="1"><div class="opt-dot"></div><span class="opt-label">A causa é analisada e corrigida</span></div>
+        <div class="option" data-q="9" data-score="2"><div class="opt-dot"></div><span class="opt-label">Resolve-se o momento, mas pouco se aprende</span></div>
+        <div class="option" data-q="9" data-score="3"><div class="opt-dot"></div><span class="opt-label">A falha volta com frequência</span></div>
+        <div class="option" data-q="9" data-score="4"><div class="opt-dot"></div><span class="opt-label">A empresa vive corrigindo sintomas</span></div>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-card" data-q="10">
+      <div class="q-number">10 / 10</div>
+      <div class="q-theme">Coerência Cultural</div>
+      <p class="q-text">O que a liderança fala combina com o que pratica?</p>
+      <div class="options">
+        <div class="option" data-q="10" data-score="1"><div class="opt-dot"></div><span class="opt-label">Sim, há coerência</span></div>
+        <div class="option" data-q="10" data-score="2"><div class="opt-dot"></div><span class="opt-label">Na maioria das vezes</span></div>
+        <div class="option" data-q="10" data-score="3"><div class="opt-dot"></div><span class="opt-label">Há distância entre fala e prática</span></div>
+        <div class="option" data-q="10" data-score="4"><div class="opt-dot"></div><span class="opt-label">As pessoas já não acreditam tanto</span></div>
+      </div>
+    </div>
+
+        <!-- TEXTO DE ENCERRAMENTO -->
+    <div style="border-left:2px solid var(--dourado);padding:28px 0 28px 28px;margin-bottom:48px;">
+      <p style="font-size:15px;font-weight:300;color:rgba(245,242,236,0.75);line-height:1.9;margin-bottom:14px;">Se alguma resposta incomodou, isso é um bom sinal. É um ponto de consciência.</p>
+      <p style="font-size:15px;font-weight:300;color:rgba(245,242,236,0.75);line-height:1.9;margin-bottom:14px;">Padrões invisíveis de centralização, comunicação e autonomia não ficam só no clima da empresa. Eles aparecem no resultado.</p>
+      <p style="font-size:15px;font-weight:500;color:var(--branco);line-height:1.9;">Aquilo que pode ser percebido pode ser trabalhado. Este é o primeiro passo.</p>
+    </div>
+
+    <div class="submit-area">
+      <button class="btn-submit" id="btn-submit" disabled onclick="showResult()">Ver meu Diagnóstico</button>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADO -->
+<section class="result-section" id="result-section">
+  <div class="result-score-wrap">
+    <div class="result-eyebrow">Seu resultado</div>
+    <div class="result-score" id="result-score">,</div>
+    <div class="result-score-label">pontos de 40</div>
+  </div>
+  <div class="result-divider"></div>
+  <div class="result-faixa" id="result-faixa"></div>
+  <p class="result-desc" id="result-desc"></p>
+
+  <div class="result-cta-box" id="cta-box">
+    <div class="result-cta-eyebrow">Próximo passo</div>
+    <h3 class="result-cta-title">Mentoria Personalizada com Marco Ott</h3>
+    <p class="result-cta-text">Com base no resultado do seu diagnóstico, você poderá contratar uma mentoria individual com Marco Ott para aprofundar a leitura dos padrões comportamentais da sua empresa.</p>
+    <p class="result-cta-text" style="margin-top:12px;">A sessão transforma essa análise em um <strong>Mapa de Clareza Comportamental</strong>, com direcionamentos práticos sobre liderança, comunicação, autonomia, cultura e próximos passos.</p>
+    <button class="btn-primary" onclick="showPagamento()" style="border:none;cursor:pointer;width:100%;max-width:320px;">Quero minha sessão com Marco</button>
+  </div>
+
+  <!-- PAGAMENTO -->
+  <div id="pagamento-box" style="display:none; margin-top:48px; border:1px solid rgba(201,168,76,0.3); padding:40px 32px; text-align:center; max-width:520px; margin-left:auto; margin-right:auto;">
+    <div style="font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--dourado);margin-bottom:16px;">Pagamento</div>
+    <div style="font-size:13px;color:var(--cinza-claro);text-decoration:line-through;margin-bottom:4px;">Valor da mentoria: R$ 3.000</div>
+    <div style="font-family:'DM Sans',sans-serif;font-size:42px;font-weight:900;color:var(--branco);margin-bottom:4px;">R$ 1.590</div>
+    <div style="font-size:13px;color:var(--dourado);font-weight:500;margin-bottom:4px;">Comprando agora, à vista</div>
+    <div style="font-size:13px;color:var(--cinza-claro);margin-bottom:32px;">Sessão individual 1h + Mapa de Clareza Comportamental</div>
+
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:20px;margin-bottom:24px;">
+      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dourado);margin-bottom:12px;">Chave PIX</div>
+      <div style="font-size:18px;font-weight:500;color:var(--branco);letter-spacing:1px;">45988132270</div>
+      <button onclick="copiarPix()" style="margin-top:12px;background:transparent;border:1px solid rgba(201,168,76,0.4);color:var(--dourado);font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:8px 20px;cursor:pointer;" id="btn-copiar">Copiar chave</button>
+    </div>
+
+    <p style="font-size:13px;color:var(--cinza-claro);margin-bottom:28px;line-height:1.7;">Após realizar o pagamento, clique no botão abaixo para confirmar com Marco pelo WhatsApp.</p>
+
+    <a id="btn-whatsapp" href="#" onclick="abrirWhatsApp(event)" style="display:block;background:#25D366;color:#fff;font-family:'DM Sans',sans-serif;font-weight:500;font-size:13px;letter-spacing:2px;text-transform:uppercase;padding:16px 32px;text-decoration:none;margin-bottom:12px;">✓ Já fiz o pagamento, Falar com Marco</a>
+  </div>
+</section>
+
+<footer>Marco Ott · Neurotrainer · Palestrante</footer>
+
+<script>
+  const answers = {};
+  const total = 10;
+
+  // Option click
+  document.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const q = opt.dataset.q;
+      if (!q) return;
+      document.querySelectorAll('.option[data-q="' + q + '"]').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      answers[parseInt(q)] = parseInt(opt.dataset.score);
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const count = Object.keys(answers).length;
+    document.getElementById('progress-fill').style.width = (count / total * 100) + '%';
+    document.getElementById('progress-label').textContent = count + ' de ' + total + ' respondidas';
+    document.getElementById('btn-submit').disabled = count < total;
+  }
+
+  const faixas = [
+    {
+      min: 10, max: 17,
+      titulo: 'Cultura com boa base de autonomia',
+      desc: 'Sua empresa demonstra bons sinais de clareza, autonomia e maturidade comportamental. Ainda assim, vale observar quais pontos podem ser fortalecidos para sustentar o crescimento com menos dependência da liderança.'
+    },
+    {
+      min: 18, max: 25,
+      titulo: 'Cultura em fase de atenção',
+      desc: 'Sua empresa funciona, mas já apresenta sinais de ruído em comunicação, papéis, autonomia ou responsabilização. Esses pontos, se não forem tratados, podem limitar o crescimento e aumentar a sobrecarga da liderança.'
+    },
+    {
+      min: 26, max: 33,
+      titulo: 'Cultura com travamentos importantes',
+      desc: 'Sua empresa pode estar dependendo demais de poucas pessoas, convivendo com conversas evitadas, conflitos acumulados ou baixa autonomia. Existe esforço, mas parte da energia está sendo consumida por desalinhamentos comportamentais.'
+    },
+    {
+      min: 34, max: 40,
+      titulo: 'Cultura altamente dependente e reativa',
+      desc: 'Sua empresa apresenta sinais de forte dependência da liderança, baixa autonomia, conflitos mal tratados e dificuldade de aprendizagem. Isso não significa falta de potencial. Significa que existe uma oportunidade importante de reorganizar comportamentos, comunicação e responsabilidades para sustentar o crescimento.'
+    }
+  ];
+
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzzVDfiuYKgxoldPkZFrafVbc8Q1QOZ6BxVa4FOZx8pgcCiF6Z-oSdvPnKWJAbnx5zx3w/exec';
+
+  const OPTION_LABELS = {
+    1: {1:'A equipe resolve bem sem mim',2:'Avança, mas ainda me consulta',3:'Muita coisa espera minha resposta',4:'Tenho dificuldade de me ausentar'},
+    2: {1:'Sim, com clareza',2:'Na maioria das vezes',3:'Há dúvidas e sobreposições',4:'Cada um faz como entende'},
+    3: {1:'Com clareza e diretamente',2:'Chega, mas com certo cuidado',3:'Por terceiros ou nas entrelinhas',4:'Só quando já virou problema'},
+    4: {1:'Sim, com segurança',2:'Toma, mas ainda confirma bastante',3:'Prefere esperar orientação',4:'Quase tudo passa pela liderança'},
+    5: {1:'Assumem, ajustam e propõem solução',2:'Conversam, mas mudam pouco',3:'Justificam ou transferem responsabilidade',4:'A culpa circula e pouco se aprende'},
+    6: {1:'Com conversa e maturidade',2:'Alguns são tratados, outros ficam',3:'São evitados e acumulam tensão',4:'Explodem e deixam desgaste'},
+    7: {1:'Sim, conduzem bem pessoas',2:'São bons na operação, mas travam com gente',3:'Lideram mais por cobrança ou pressão',4:'Ainda depende muito de mim'},
+    8: {1:'Sim, falam com respeito',2:'Falam, mas com cuidado',3:'Evitam discordar da liderança',4:'O silêncio aparece demais'},
+    9: {1:'A causa é analisada e corrigida',2:'Resolve-se o momento, mas pouco se aprende',3:'A falha volta com frequência',4:'A empresa vive corrigindo sintomas'},
+    10: {1:'Sim, há coerência',2:'Na maioria das vezes',3:'Há distância entre fala e prática',4:'As pessoas já não acreditam tanto'}
+  };
+
+  let dadosEmpresario = {};
+
+  function showResult() {
+    const nome = document.getElementById('campo-nome').value.trim();
+    const email = document.getElementById('campo-email') ? document.getElementById('campo-email').value.trim() : '';
+    const empresa = document.getElementById('campo-empresa').value.trim();
+    const whatsapp = document.getElementById('campo-whatsapp').value.trim();
+
+    if (!nome || !email || !empresa || !whatsapp) {
+      alert('Por favor, preencha seu nome, e-mail, empresa e WhatsApp antes de ver o diagnóstico.');
+      window.scrollTo({ top: document.getElementById('identificacao').offsetTop - 20, behavior: 'smooth' });
+      return;
+    }
+
+    const score = Object.values(answers).reduce((a, b) => a + b, 0);
+    const faixa = faixas.find(f => score >= f.min && score <= f.max);
+
+    dadosEmpresario = { nome, email, empresa, whatsapp, score, faixa: faixa.titulo };
+
+    // Monta URL com parâmetros
+    const params = new URLSearchParams({
+      nome, email, empresa, whatsapp,
+      pontuacao: score,
+      faixa: faixa.titulo,
+      q1: OPTION_LABELS[1][answers[1]],
+      q2: OPTION_LABELS[2][answers[2]],
+      q3: OPTION_LABELS[3][answers[3]],
+      q4: OPTION_LABELS[4][answers[4]],
+      q5: OPTION_LABELS[5][answers[5]],
+      q6: OPTION_LABELS[6][answers[6]],
+      q7: OPTION_LABELS[7][answers[7]],
+      q8: OPTION_LABELS[8][answers[8]],
+      q9: OPTION_LABELS[9][answers[9]],
+      q10: OPTION_LABELS[10][answers[10]]
+    });
+
+    fetch(SCRIPT_URL + '?' + params.toString(), {
+      method: 'GET',
+      mode: 'no-cors'
+    }).catch(() => {});
+
+    document.getElementById('form-content').style.display = 'none';
+    document.querySelector('.form-section').style.display = 'none';
+
+    document.getElementById('result-score').textContent = score;
+    document.getElementById('result-faixa').textContent = faixa.titulo;
+    document.getElementById('result-desc').textContent = faixa.desc;
+
+    const rs = document.getElementById('result-section');
+    rs.classList.add('visible');
+    window.scrollTo({ top: rs.offsetTop - 40, behavior: 'smooth' });
+  }
+
+  function showPagamento() {
+    document.getElementById('pagamento-box').style.display = 'block';
+    document.getElementById('cta-box').style.display = 'none';
+    window.scrollTo({ top: document.getElementById('pagamento-box').offsetTop - 40, behavior: 'smooth' });
+  }
+
+  function copiarPix() {
+    navigator.clipboard.writeText('45988132270').then(() => {
+      const btn = document.getElementById('btn-copiar');
+      btn.textContent = 'Copiado!';
+      setTimeout(() => btn.textContent = 'Copiar chave', 2000);
+    });
+  }
+
+  function abrirWhatsApp(e) {
+    e.preventDefault();
+    const { nome, email, empresa, whatsapp, score, faixa } = dadosEmpresario;
+    const msg = encodeURIComponent(
+      "Olá Marco! Acabei de fazer o diagnóstico *Padrões Invisíveis da Sua Empresa* e realizar o pagamento da sessão.\n\n" +
+      "*Nome:* " + (nome || '') + "\n" +
+      "*E-mail:* " + (email || '') + "\n" +
+      "*Empresa:* " + (empresa || '') + "\n" +
+      "*WhatsApp:* " + (whatsapp || '') + "\n" +
+      "*Pontuação:* " + score + " pontos\n" +
+      "*Resultado:* " + faixa + "\n\n" +
+      "Quero agendar minha sessão!"
+    );
+    window.open('https://wa.me/5545988132270?text=' + msg, '_blank');
+  }
+</script>
+</body>
+</html>
