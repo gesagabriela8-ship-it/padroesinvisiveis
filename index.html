@@ -415,8 +415,7 @@
   <h1 class="hero-title" style="line-height:1.0;">Diagnóstico<br /><span style="font-size:0.48em;font-weight:500;color:var(--dourado);font-style:normal;letter-spacing:2px;line-height:0.9;display:block;margin-top:10px;">Padrões Invisíveis</span></h1>
   <div class="hero-divider"></div>
   <p class="hero-intro">
-    Este diagnóstico existe para auxiliar a percepção dos padrões invisíveis que podem fortalecer ou limitar o crescimento do seu negócio.<br /><br />
-    Não existe certo ou errado. Responda com honestidade.
+    Este diagnóstico existe para auxiliar a percepção dos padrões invisíveis que podem fortalecer ou limitar o crescimento do seu negócio.
   </p>
   <div class="hero-cta">
     <a class="btn-primary" href="#diagnostico">Fazer o Diagnóstico</a>
@@ -427,7 +426,6 @@
 <section class="form-section" id="diagnostico">
   <div id="form-content">
     <p class="section-eyebrow">Diagnóstico</p>
-    <h2 class="section-title">Diagnóstico dos Padrões Invisíveis da Sua Empresa</h2>
     <p style="font-size:15px;font-weight:300;color:rgba(245,242,236,0.7);line-height:1.8;margin-bottom:32px;">A cultura de uma empresa aparece no comportamento que se repete na rotina, nas decisões, nas conversas, nos conflitos e nos momentos de pressão.<br /><br />Responda com honestidade. Não existe certo ou errado. Assinale uma resposta para cada pergunta e obtenha uma leitura inicial sobre liderança, autonomia, comunicação, cultura e resultado.</p>
 
     <!-- IDENTIFICAÇÃO -->
@@ -618,7 +616,7 @@
     <h3 class="result-cta-title">Mentoria Personalizada com Marco Ott</h3>
     <p class="result-cta-text">Com base no resultado do seu diagnóstico, você poderá contratar uma mentoria individual com Marco Ott para aprofundar a leitura dos padrões comportamentais da sua empresa.</p>
     <p class="result-cta-text" style="margin-top:12px;">A sessão transforma essa análise em um <strong>Mapa de Clareza Comportamental</strong>, com direcionamentos práticos sobre liderança, comunicação, autonomia, cultura e próximos passos.</p>
-    <button class="btn-primary" onclick="showPagamento()" style="border:none;cursor:pointer;width:100%;max-width:320px;">Quero minha sessão com Marco</button>
+    <button class="btn-primary" onclick="abrirWhatsAppMentoria()" style="border:none;cursor:pointer;width:100%;max-width:320px;">Quero contratar a mentoria</button>
   </div>
 
   <!-- PAGAMENTO -->
@@ -626,7 +624,7 @@
     <div style="font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--dourado);margin-bottom:16px;">Pagamento</div>
     <div style="font-size:13px;color:var(--cinza-claro);text-decoration:line-through;margin-bottom:4px;">Valor da mentoria: R$ 3.000</div>
     <div style="font-family:'DM Sans',sans-serif;font-size:42px;font-weight:900;color:var(--branco);margin-bottom:4px;">R$ 1.590</div>
-    <div style="font-size:13px;color:var(--dourado);font-weight:500;margin-bottom:4px;">Comprando agora, à vista</div>
+    <div style="font-size:13px;color:var(--dourado);font-weight:500;margin-bottom:4px;">Comprando em até 24 horas</div>
     <div style="font-size:13px;color:var(--cinza-claro);margin-bottom:32px;">Sessão individual 1h + Mapa de Clareza Comportamental</div>
 
     <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:20px;margin-bottom:24px;">
@@ -769,6 +767,17 @@
       btn.textContent = 'Copiado!';
       setTimeout(() => btn.textContent = 'Copiar chave', 2000);
     });
+  }
+
+  function abrirWhatsAppMentoria() {
+    const { nome, empresa, whatsapp, score, faixa } = dadosEmpresario;
+    const msg = encodeURIComponent(
+      "Oi Marco! Sou " + (nome || '') + ", da " + (empresa || '') + ".\n\n" +
+      "Acabei de fazer o diagnóstico dos Padrões Invisíveis e quero contratar a mentoria.\n\n" +
+      "Meu resultado foi: " + faixa + " (" + score + " pontos).\n\n" +
+      "Pode me mandar o link de pagamento?"
+    );
+    window.open('https://wa.me/5545988132270?text=' + msg, '_blank');
   }
 
   function abrirWhatsApp(e) {
