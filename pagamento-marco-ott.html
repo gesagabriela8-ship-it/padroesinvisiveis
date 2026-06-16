@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="only light" />
+  <title>Mentoria com Marco Ott</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --preto: #0d0d0d;
+      --branco: #f5f2ec;
+      --dourado: #4ab8d4;
+      --rosa: #e8606a;
+      --cinza: #888;
+    }
+    body {
+      background-color: var(--preto) !important;
+      color: var(--branco) !important;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .container {
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .tag {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--dourado);
+      margin-bottom: 24px;
+    }
+
+    .titulo {
+      font-size: clamp(28px, 6vw, 42px);
+      font-weight: 700;
+      color: var(--branco);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .subtitulo {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--cinza);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--dourado);
+      margin: 0 auto 40px;
+    }
+
+    .preco-antigo {
+      font-size: 14px;
+      color: var(--cinza);
+      text-decoration: line-through;
+      margin-bottom: 8px;
+    }
+
+    .preco {
+      font-size: clamp(52px, 12vw, 72px);
+      font-weight: 900;
+      color: var(--branco);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .preco-tag {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--dourado);
+      margin-bottom: 4px;
+    }
+
+    .preco-desc {
+      font-size: 13px;
+      color: var(--cinza);
+      margin-bottom: 32px;
+    }
+
+    .pix-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .pix-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--dourado);
+      margin-bottom: 12px;
+    }
+
+    .pix-chave {
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--branco);
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .btn-copiar {
+      background: transparent;
+      border: 1px solid rgba(74,184,212,0.4);
+      color: var(--dourado);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-copiar:hover {
+      background: rgba(74,184,212,0.08);
+    }
+
+    .instrucao {
+      font-size: 13px;
+      color: var(--cinza);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .btn-whatsapp {
+      display: block;
+      width: 100%;
+      background: #25D366;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 18px 32px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s;
+      margin-bottom: 40px;
+    }
+
+    .btn-whatsapp:hover { opacity: 0.9; }
+
+    .rodape {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tag">Marco Ott · Mentoria Individual</div>
+    <h1 class="titulo">Mapa de Clareza<br />Comportamental</h1>
+    <p class="subtitulo">Sessão individual de 1h com Marco Ott para transformar seu diagnóstico em um plano de ação concreto.</p>
+    <div class="divider"></div>
+
+    <div class="preco-antigo">Valor da mentoria: R$ 3.000</div>
+    <div class="preco">R$ 1.590</div>
+    <div class="preco-tag">Comprando em até 24 horas</div>
+    <div class="preco-desc">Sessão individual 1h + Mapa de Clareza Comportamental</div>
+
+    <div class="pix-box">
+      <div class="pix-label">Chave PIX</div>
+      <div class="pix-chave">45988132270</div>
+      <button class="btn-copiar" id="btn-copiar" onclick="copiarPix()">Copiar chave</button>
+    </div>
+
+    <p class="instrucao">Após realizar o pagamento, clique no botão abaixo para confirmar com Marco pelo WhatsApp.</p>
+
+    <a class="btn-whatsapp" href="#" onclick="abrirWhatsApp(event)">✓ Já fiz o pagamento, falar com Marco</a>
+
+    <div class="rodape">Marco Ott · Neurotrainer · Palestrante</div>
+  </div>
+
+  <script>
+    function copiarPix() {
+      navigator.clipboard.writeText('45988132270').then(() => {
+        const btn = document.getElementById('btn-copiar');
+        btn.textContent = 'Copiado!';
+        setTimeout(() => btn.textContent = 'Copiar chave', 2000);
+      });
+    }
+
+    function abrirWhatsApp(e) {
+      e.preventDefault();
+      const msg = encodeURIComponent(
+        "Oi Marco! Acabei de realizar o pagamento da mentoria individual.\n\nQuero agendar minha sessão!"
+      );
+      window.open('https://wa.me/5545988132270?text=' + msg, '_blank');
+    }
+  </script>
+</body>
+</html>
