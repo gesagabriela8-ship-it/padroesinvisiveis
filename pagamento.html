@@ -175,9 +175,33 @@
     <p class="subtitulo">Sessão individual de 1h com Marco Ott para transformar seu diagnóstico em um plano de ação concreto.</p>
     <div class="divider"></div>
 
-    <div class="preco-antigo">Valor da mentoria: R$ 3.000</div>
-    <div class="preco">R$ 1.590</div>
+    <div style="font-size:14px;color:#555;margin-bottom:8px;">
+      Valor da mentoria: <span style="position:relative;display:inline-block;color:#666;font-weight:500;font-size:15px;">
+        R$ 3.000
+        <span style="position:absolute;left:-2px;right:-2px;top:50%;height:2px;background:#555;transform:translateY(-50%);border-radius:1px;"></span>
+      </span>
+    </div>
+    <div class="preco" style="background:linear-gradient(135deg,#f5f2ec,#4ab8d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(74,184,212,0.4));">R$ 1.590</div>
     <div class="preco-tag">Comprando em até 24 horas</div>
+
+    <!-- TIMER -->
+    <div style="margin:16px auto 8px;display:inline-flex;gap:12px;align-items:center;justify-content:center;">
+      <div style="text-align:center;">
+        <div id="timer-h" style="font-size:36px;font-weight:900;color:var(--rosa);font-family:'DM Sans',sans-serif;line-height:1;">24</div>
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">horas</div>
+      </div>
+      <div style="font-size:30px;font-weight:900;color:#444;padding-bottom:16px;">:</div>
+      <div style="text-align:center;">
+        <div id="timer-m" style="font-size:36px;font-weight:900;color:var(--rosa);font-family:'DM Sans',sans-serif;line-height:1;">00</div>
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">min</div>
+      </div>
+      <div style="font-size:30px;font-weight:900;color:#444;padding-bottom:16px;">:</div>
+      <div style="text-align:center;">
+        <div id="timer-s" style="font-size:36px;font-weight:900;color:var(--rosa);font-family:'DM Sans',sans-serif;line-height:1;">00</div>
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">seg</div>
+      </div>
+    </div>
+
     <div class="preco-desc">Sessão individual 1h + Mapa de Clareza Comportamental</div>
 
     <div class="pix-box">
@@ -194,6 +218,42 @@
   </div>
 
   <script>
+    // Timer regressivo de 24h
+    const STORAGE_KEY = 'timer_inicio_pagamento';
+    const DURACAO = 24 * 60 * 60; // 24h em segundos
+
+    function getInicio() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) return parseInt(saved);
+      const agora = Math.floor(Date.now() / 1000);
+      localStorage.setItem(STORAGE_KEY, agora);
+      return agora;
+    }
+
+    function atualizarTimer() {
+      const inicio = getInicio();
+      const agora = Math.floor(Date.now() / 1000);
+      const decorrido = agora - inicio;
+      const restante = Math.max(0, DURACAO - decorrido);
+
+      const h = Math.floor(restante / 3600);
+      const m = Math.floor((restante % 3600) / 60);
+      const s = restante % 60;
+
+      document.getElementById('timer-h').textContent = String(h).padStart(2, '0');
+      document.getElementById('timer-m').textContent = String(m).padStart(2, '0');
+      document.getElementById('timer-s').textContent = String(s).padStart(2, '0');
+
+      if (restante === 0) {
+        document.getElementById('timer-h').style.color = '#444';
+        document.getElementById('timer-m').style.color = '#444';
+        document.getElementById('timer-s').style.color = '#444';
+      }
+    }
+
+    atualizarTimer();
+    setInterval(atualizarTimer, 1000);
+
     function copiarPix() {
       navigator.clipboard.writeText('45988132270').then(() => {
         const btn = document.getElementById('btn-copiar');
